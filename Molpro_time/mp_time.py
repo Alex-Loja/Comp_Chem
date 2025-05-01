@@ -1,16 +1,12 @@
 #!/usr/bin/env python3
 import sys
-import numpy as np
 import math
 import os
-import matplotlib
-import pandas as pd
-import matplotlib.pyplot as plt
 from math import floor
 
 ######Molpro_Time#####
 #Ver 1.0
-#Simple script to calculate average calculation time of a subset of files
+#Simple script to calculate the average calculation time of a subset of files
 #run in Molpro
 
 
