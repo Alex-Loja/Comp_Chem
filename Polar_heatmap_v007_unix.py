@@ -34,13 +34,9 @@ from matplotlib.patches import Arc
 ###     Font of R values is reduced
 ###     Ticks for R values are more reasonable (whole numbers)
 
-
-
-
 ### To run ###
 ## Have a parent folder containing subfolders for scans and BSSE
 ## run from within the Scans folder and make sure the BSSE folders are in the parent directory
-
 
 class bcolors : 
     DIRC = '\033[96m'
@@ -80,7 +76,7 @@ options = {
 ##############
 
 class csv_file:
-    """Handling commeon file reading and conversion to np.mat"""
+    """Handling common file reading and conversion to np.mat"""
     
     def __init__(self, file_name):
         self.name = file_name
@@ -206,7 +202,6 @@ if options['inc. title'] == False:
     
         
     my_gradient = LinearSegmentedColormap.from_list('my_gradient', (
-    # Edit this gradient at https://eltos.github.io/gradient/#0:001D93-25:0034FE-47.5:FDFDFF-50:FFFFFF-52.5:FFFFFF-100:FF000C
     (0.000, (0.000, 0.114, 0.576)),
     (0.250, (0.000, 0.204, 0.996)),
     (0.475, (0.992, 0.992, 1.000)),
@@ -214,8 +209,6 @@ if options['inc. title'] == False:
     (0.525, (1.000, 1.000, 1.000)),
     (1.000, (1.000, 0.000, 0.047))))
     
-    # low_levels = np.linspace(-280,0,16)[0:-2]
-    # high_levels = np.linspace(0,1000,20)
     low_levels = np.linspace(options['down_lim'], 0, options['down_lim_ticks'])[0:-2]
     high_levels = np.linspace(0, options['up_lim'], options['up_lim_ticks'])
     levels = np.append(low_levels,high_levels)
@@ -223,18 +216,7 @@ if options['inc. title'] == False:
     
     fig, axis = plt.subplots(subplot_kw=dict(projection='polar'))  
     matplotlib.rcParams.update({'font.size': options['font_size']})
-    # contourplot = axis.contourf(theta, r, unit_mat, cmap = my_gradient, levels=levels)
-    # contourplot = axis.contourf(theta, r, unit_mat, cmap = my_gradient)
     contourplot = axis.contourf(angle_mesh, R_mesh, new_unit_mat, cmap = my_gradient, norm=norm, levels=levels, extend='max')
-    
-    
-    #semicircle
-    # semi_R_mesh = ([0, 0], [3, 3])
-    # semi_Angle_mesh = ([0, 0], [180, 180])
-    # semi_unit_mesh = ([zero_point, zero_point], [zero_point, zero_point])
-    # contourplot_2 = axis.contourf(semi_Angle_mesh, semi_R_mesh, semi_unit_mesh, cmap = my_gradient, norm=norm, levels=levels, extend='max')
-
-
 
     #labels
     axis.set_title(title)
@@ -267,7 +249,6 @@ if options['inc. title'] == False:
     cbar.ax.yaxis.set_major_locator(ticker.FixedLocator(majors))
     cbar.ax.set_yticklabels(labels)
     cbar.ax.yaxis.set_major_formatter(FormatStrFormatter('%.0f'))
-
         
     #file handeling
     new_file = file_info.name.replace('.csv','.png')
@@ -285,7 +266,6 @@ if options['inc. title'] == False:
     plot_mat[1:,0] = file_info.rvals.copy().astype(float)
     plot_mat[1:,1:] = unit_mat.copy().astype(float)
     if options['save_plotmat'] == True: np.savetxt(new_csv, plot_mat, delimiter=', ')
-
 
 now = datetime.now()
 dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
